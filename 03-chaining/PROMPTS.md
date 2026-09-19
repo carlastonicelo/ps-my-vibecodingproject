@@ -42,11 +42,16 @@ Do not change anything else in the project or touch the underlying logic.
 
 ## Reusable techniques learned
 
-- _____
-- _____
+- The Behavior prompt did not apply all the requested states, especially the loading and error states. I learned that even with prompt chaining, I need to test each requested behavior individually and make the prompt more explicit when a state is not implemented.
 
 ## What broke (and the fix)
 
 _Where a single mega-prompt failed and chaining fixed it._
 
-_____
+The loading and error states. Fix only the missing behavior states in the existing Retention Engine. Do not redesign, rebuild, or change the existing user flow.
+1. In the First Value flow, when the user clicks to generate the weekly operations brief, show a visible loading state with the exact message: “Creating your weekly brief…” before displaying the generated result.
+2. Add an error state for brief generation with the exact message: “We couldn't generate your brief. Try again.” Include a working Retry action.
+3. In the Team Invitation flow, when no teammates have been added, show the empty state: “Your brief is ready. Invite 2 teammates to turn this into shared team value.”
+4. If an invitation fails, show: “Invite couldn't be sent. Check the email and try again.” Include a working Retry action.
+5. Make each of these states testable in the prototype so I can verify loading, empty, and error behavior.
+Do not change the visual design, existing screens, navigation, content, or any behavior that is already working. Only implement the missing states described above.
